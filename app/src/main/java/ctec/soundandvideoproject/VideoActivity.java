@@ -4,13 +4,56 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+import android.net.Uri;
 
-public class VideoActivity extends AppCompatActivity {
+
+public class VideoActivity extends AppCompatActivity
+{
+    private VideoView myPlayer;
+    private Button HomeButton;
+    private MediaController myVideoController;
+    private Uri videoLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
+
+        myPlayer = (VideoView) findViewById(R.id.videoView);
+        HomeButton = (Button) findViewById(R.id.HomeButton);
+
+        videoLocation = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.Fallout4);
+        myVideoController = new MediaController(this);
+        //Prepare the Video
+        setupMedia();
+        setupListeners();
+
+    }
+
+    private void setupMedia()
+    {
+        myPlayer.setMediaController(myVideoController);
+        myPlayer.setVideoURI(videoLocation);
+    }
+
+    private void setupListeners()
+    {
+        HomeButton.setOnClickListener(new View.OnClickListener()
+        {
+
+
+            @Override
+            public void onClick(View currentView)
+            {
+                Intent myIntent = new Intent(currentView.getContext(), SoundActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
     }
 
     @Override
