@@ -12,7 +12,7 @@ import android.widget.*;
 import android.net.Uri;
 
 
-public class VideoActivity extends AppCompatActivity
+public class VideoActivity extends Activity
 {
     private VideoView myPlayer;
     private Button HomeButton;
@@ -45,14 +45,14 @@ public class VideoActivity extends AppCompatActivity
     {
         HomeButton.setOnClickListener(new View.OnClickListener()
         {
-
-
             @Override
             public void onClick(View currentView)
             {
-                Intent myIntent = new Intent(currentView.getContext(), SoundActivity.class);
-                startActivityForResult(myIntent, 0);
+                Intent returnIntent = new Intent();
+                setResult(RESULT_OK, returnIntent);
+                finish();
             }
+            
         });
     }
 
