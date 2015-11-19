@@ -52,7 +52,7 @@ public class VideoActivity extends Activity
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
-            
+
         });
     }
 
